@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  *
- * @author PatWolohan <patwolohan.org>
+ * @author PatWolohan patwolohan.org
  */
 public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySuspectMatch {
 
@@ -33,21 +33,37 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
     private Map<String, Long> societyMatchesMap = new LinkedHashMap<>();
     private Map<String, Long> phoneMatchesMap = new LinkedHashMap<>();
 
+    /**
+     *
+     */
     public Search() {
 
     }
 
+    /**
+     *
+     * @param b
+     */
     @Override
     public void listOfSpies(Build b) {
         b.printListOfSpies();
     }
 
+    /**
+     *
+     * @param b
+     */
     @Override
     public void spySequence(Build b) {
         b.printSpyFibIndex();
 
     }
 
+    /**
+     *
+     * @param b
+     * @param s
+     */
     @Override
     public void spySuspectMatch(Build b, SpyDataStore s) {
 
@@ -109,6 +125,11 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         //System.out.println("No Spy Suspect found: ");
     }
 
+    /**
+     *
+     * @param b
+     * @param s
+     */
     @Override
     public void spySearchMatch(Build b, SpyDataStore s) {
 
@@ -206,6 +227,11 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         System.out.println("Address Matches " + addressMatchesList);
     }
 
+    /**
+     *
+     * @param a
+     * @return
+     */
     public Map<String, Long> checkDuplicates(List<String> a) {
 
         Map<String, Long> strCountMap = a.stream().collect(Collectors.groupingBy(e -> e.toString().toLowerCase(), Collectors.counting()));
@@ -213,6 +239,12 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         return strCountMap;
     }
 
+    /**
+     *
+     * @param hm
+     * @param l
+     * @return
+     */
     public List<String> getKeysFromHashMap(Map<String, Long> hm, Long l) {
         List<String> list = new ArrayList();
         Set<String> keys = hm.keySet();
@@ -224,82 +256,162 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         return list;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getJobMatches() {
         return jobMatchesList;
     }
 
+    /**
+     *
+     * @param jobMatches
+     */
     public void setJobMatches(List<String> jobMatches) {
         this.jobMatchesList = jobMatches;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getClubMatches() {
         return clubMatchesList;
     }
 
+    /**
+     *
+     * @param clubMatches
+     */
     public void setClubMatches(ArrayList<String> clubMatches) {
         this.clubMatchesList = clubMatches;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getPhoneMatches() {
         return phoneMatchesList;
     }
 
+    /**
+     *
+     * @param phoneMatches
+     */
     public void setPhoneMatches(ArrayList<String> phoneMatches) {
         this.phoneMatchesList = phoneMatches;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<String, Long> getJobMatchesMap() {
         return jobMatchesMap;
     }
 
+    /**
+     *
+     * @param jobMatchesMap
+     */
     public void setJobMatchesMap(Map<String, Long> jobMatchesMap) {
         this.jobMatchesMap = jobMatchesMap;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<String, Long> getClubMatchesMap() {
         return clubMatchesMap;
     }
 
+    /**
+     *
+     * @param clubMatchesMap
+     */
     public void setClubMatchesMap(Map<String, Long> clubMatchesMap) {
         this.clubMatchesMap = clubMatchesMap;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<String, Long> getPhoneMatchesMap() {
         return phoneMatchesMap;
     }
 
+    /**
+     *
+     * @param phoneMatchesMap
+     */
     public void setPhoneMatchesMap(Map<String, Long> phoneMatchesMap) {
         this.phoneMatchesMap = phoneMatchesMap;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getJobMatchesList() {
         return jobMatchesList;
     }
 
+    /**
+     *
+     * @param jobMatchesList
+     */
     public void setJobMatchesList(List<String> jobMatchesList) {
         this.jobMatchesList = jobMatchesList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getClubMatchesList() {
         return clubMatchesList;
     }
 
+    /**
+     *
+     * @param clubMatchesList
+     */
     public void setClubMatchesList(List<String> clubMatchesList) {
         this.clubMatchesList = clubMatchesList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getPhoneMatchesList() {
         return phoneMatchesList;
     }
 
+    /**
+     *
+     * @param phoneMatchesList
+     */
     public void setPhoneMatchesList(List<String> phoneMatchesList) {
         this.phoneMatchesList = phoneMatchesList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getAddressMatchesList() {
         return addressMatchesList;
     }
 
+    /**
+     *
+     * @param addressMatchesList
+     */
     public void setAddressMatchesList(List<String> addressMatchesList) {
         this.addressMatchesList = addressMatchesList;
     }

@@ -10,8 +10,14 @@ import buildData.SpyDataStore;
 
 /**
  *
- * @author PatWolohan <patwolohan.org>
+ * @author PatWolohan patwolohan.org
  */
 public interface SpySuspectMatch {
+
+    /**
+     *
+     * @param b
+     * @param s
+     */
     public void spySuspectMatch(Build b, SpyDataStore s);
 }

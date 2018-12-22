@@ -7,27 +7,48 @@ package data;
 
 /**
  *
- * @author PatWolohan <patwolohan.org>
+ * @author PatWolohan patwolohan.org
  */
 public class Data {
     private static int fibSize = 40;
 
+    /**
+     *
+     * @return
+     */
     public static int getFibSize() {
         return fibSize;
     }
     private Integer[] fibArray = new Integer[fibSize];
         
+    /**
+     *
+     */
     public Data() {
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer[] getFibArray() {
         return fibArray;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getFibArrayLength() {
         int l = fibArray.length;
         return l;
     }
 
+    /**
+     *
+     * @param n
+     * @param fib
+     */
     public void setFibArray(int n, int fib){
         fibArray[n] = fib;
     }

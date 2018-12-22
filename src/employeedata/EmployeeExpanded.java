@@ -22,89 +22,158 @@ public class EmployeeExpanded {
     private boolean isClubMatch = false;
     private boolean isJobMatch = false;
 
+    /**
+     *
+     */
     public EmployeeExpanded() {
         super();
     }
     
-  
-    
-
-   
-
-   public void getPhoneList(){
+    /**
+     *
+     */
+    public void getPhoneList(){
        
    }
-   public void getClubList(){
+
+    /**
+     *
+     */
+    public void getClubList(){
        
    }
-   public void getJobList(){
+
+    /**
+     *
+     */
+    public void getJobList(){
        
    }
            
+    /**
+     *
+     * @return
+     */
     public int getFibIndex() {
         return fibIndex;
     }
 
+    /**
+     *
+     * @param fibIndex
+     */
     public void setFibIndex(int fibIndex) {
         this.fibIndex = fibIndex;
     }
 
-    
-
-	public Employee getEmployee() {
+    /**
+     *
+     * @return
+     */
+    public Employee getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(Employee employee) {
+    /**
+     *
+     * @param employee
+     */
+    public void setEmployee(Employee employee) {
 		this.employee = employee;                
 	}
 
+    /**
+     *
+     * @return
+     */
     public int getPhoneMatchNum() {
         return phoneMatchNum;
     }
 
+    /**
+     *
+     * @param phoneMatchNum
+     */
     public void setPhoneMatchNum(int phoneMatchNum) {
         this.phoneMatchNum = phoneMatchNum;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getClubMatchNum() {
         return clubMatchNum;
     }
 
+    /**
+     *
+     * @param clubMatchNum
+     */
     public void setClubMatchNum(int clubMatchNum) {
         this.clubMatchNum = clubMatchNum;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getJobMatchNum() {
         return jobMatchNum;
     }
 
+    /**
+     *
+     * @param jobMatchNum
+     */
     public void setJobMatchNum(int jobMatchNum) {
         this.jobMatchNum = jobMatchNum;
     }
 
-   
-
+    /**
+     *
+     * @return
+     */
     public boolean isIsPhoneMatch() {
         return isPhoneMatch;
     }
 
+    /**
+     *
+     * @param isPhoneMatch
+     */
     public void setIsPhoneMatch(boolean isPhoneMatch) {
         this.isPhoneMatch = isPhoneMatch;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isIsClubMatch() {
         return isClubMatch;
     }
 
+    /**
+     *
+     * @param isClubMatch
+     */
     public void setIsClubMatch(boolean isClubMatch) {
         this.isClubMatch = isClubMatch;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isIsJobMatch() {
         return isJobMatch;
     }
 
+    /**
+     *
+     * @param isJobMatch
+     */
     public void setIsJobMatch(boolean isJobMatch) {
         this.isJobMatch = isJobMatch;
     }
@@ -114,20 +183,34 @@ public class EmployeeExpanded {
         return "EmployeeExpanded{" + "employee=" + employee + ", fibIndex=" + fibIndex + ", phoneMatchNum=" + phoneMatchNum + ", clubMatchNum=" + clubMatchNum + ", jobMatchNum=" + jobMatchNum + ", addressMatchNum=" + addressMatchNum + ", isPhoneMatch=" + isPhoneMatch + ", isClubMatch=" + isClubMatch + ", isJobMatch=" + isJobMatch + '}';
     }
 
-   
-
+    /**
+     *
+     * @return
+     */
     public int getAddressMatchNum() {
         return addressMatchNum;
     }
 
+    /**
+     *
+     * @param addressMatchNum
+     */
     public void setAddressMatchNum(int addressMatchNum) {
         this.addressMatchNum = addressMatchNum;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSocietyMatchNum() {
         return societyMatchNum;
     }
 
+    /**
+     *
+     * @param societyMatchNum
+     */
     public void setSocietyMatchNum(int societyMatchNum) {
         this.societyMatchNum = societyMatchNum;
     }

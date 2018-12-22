@@ -9,9 +9,14 @@ import buildData.Build;
 
 /**
  *
- * @author PatWolohan <patwolohan.org>
+ * @author PatWolohan patwolohan.org
  */
 public interface ListOfSpies {
+
+    /**
+     *
+     * @param b
+     */
     public void listOfSpies(Build b);
     
 }

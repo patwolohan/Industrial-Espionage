@@ -16,24 +16,33 @@ public class Spy extends EmployeeExpanded{
     
     private boolean isSpy = false;
     
-    
+    /**
+     *
+     */
     public Spy() {
        super(); 
     }
     
+    /**
+     *
+     * @param employee
+     */
     public Spy(Employee employee) {
         this.setEmployee(employee);
     }
     
-    
-    
-
-
-
+    /**
+     *
+     * @return
+     */
     public boolean isIsSpy() {
         return isSpy;
     }
 
+    /**
+     *
+     * @param isSpy
+     */
     public void setIsSpy(boolean isSpy) {
         this.isSpy = isSpy;
     }

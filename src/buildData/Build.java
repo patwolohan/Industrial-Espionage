@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  *
- * @author PatWolohan <patwolohan.org>
+ * @author PatWolohan patwolohan.org
  */
 public class Build {
 
@@ -49,10 +49,16 @@ public class Build {
 
     private SpyDataStore spyDataStBuild = new SpyDataStore();
 
+    /**
+     *
+     */
     public Build() {
 
     }
 
+    /**
+     *
+     */
     public void buildFib() {
 
         Data d = new Data();
@@ -67,32 +73,57 @@ public class Build {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Employee> getStaff() {
         return staff;
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public ArrayList<Employee> buildEmployeeFile() throws IOException, ClassNotFoundException {
 
         staff = deserializeFromDisk(staff);
         return staff;
     }
 
+    /**
+     *
+     */
     public void buildAll() {
 
     }
 
+    /**
+     *
+     */
     public void buildEmpPhoneFile() {
 
     }
 
+    /**
+     *
+     */
     public void buildEmpClubFile() {
 
     }
 
+    /**
+     *
+     */
     public void buildEmpJobFile() {
 
     }
 
+    /**
+     *
+     */
     public void buildSpyList() {
 
         //int count = 0;
@@ -171,6 +202,9 @@ public class Build {
         //System.out.println("Phone List found :" + empPhoneListBuild);
     }
 
+    /**
+     *
+     */
     public void printSpyFibIndex() {
 
         System.out.println(fibArrayList);
@@ -183,6 +217,9 @@ public class Build {
         System.out.println("\n SpyFibIndex Spies " + spyDataStBuild.getSpyFibIndexSize() + "\n");
     }
 
+    /**
+     *
+     */
     public void printListOfSpies() {
         int countSpy = 0;
         //for (Employee spy : spyDataStBuild.getSpyList()) {
@@ -194,6 +231,9 @@ public class Build {
         System.out.println("Number of Spies " + countSpy);
     }
 
+    /**
+     *
+     */
     public void buildJobList() {
         int countj = 0;
         for (Employee emp : staff) {
@@ -213,6 +253,13 @@ public class Build {
 
     }
 
+    /**
+     *
+     * @param staff
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public ArrayList<Employee> deserializeFromDisk(ArrayList<Employee> staff) throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream("Employee.ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -220,187 +267,369 @@ public class Build {
         return staff;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer[] getFibArray() {
         return fibArray;
     }
 
+    /**
+     *
+     */
     public void printFibArray() {
         System.out.println(Arrays.toString(fibArray));
     }
 
-
+    /**
+     *
+     * @return
+     */
     public List<Integer> getFibArrayList() {
         return fibArrayList;
     }
 
+    /**
+     *
+     * @param fibArrayList
+     */
     public void setFibArrayList(List<Integer> fibArrayList) {
         this.fibArrayList = fibArrayList;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Integer> getSpyIndex() {
         return spyIndex;
     }
 
+    /**
+     *
+     * @param spyIndex
+     */
     public void setSpyIndex(List<Integer> spyIndex) {
         this.spyIndex = spyIndex;
     }
 
+    /**
+     *
+     * @return
+     */
     public SpyDataStore getSpyDataStBuild() {
         return spyDataStBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Spy> getSpyListBuild() {
         return spyListBuild;
     }
 
+    /**
+     *
+     * @param spyList
+     */
     public void setSpyListBuild(List<Spy> spyList) {
         this.spyListBuild = spyList;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getBuildEmpClub() {
         return empClubMapBuild;
     }
 
+    /**
+     *
+     * @param buildEmpClub
+     */
     public void setBuildEmpClub(HashMap<String, String> buildEmpClub) {
         this.empClubMapBuild = buildEmpClub;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getBuildEmpPhone() {
         return empPhoneMapBuild;
     }
 
+    /**
+     *
+     * @param buildEmpPhone
+     */
     public void setBuildEmpPhone(HashMap<String, String> buildEmpPhone) {
         this.empPhoneMapBuild = buildEmpPhone;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getBuildEmpJob() {
         return empJobMapBuild;
     }
 
+    /**
+     *
+     * @param buildEmpJob
+     */
     public void setBuildEmpJob(HashMap<String, String> buildEmpJob) {
         this.empJobMapBuild = buildEmpJob;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getBuildspyClub() {
         return spyClubMapBuild;
     }
 
+    /**
+     *
+     * @param buildspyClub
+     */
     public void setBuildspyClub(HashMap<String, String> buildspyClub) {
         this.spyClubMapBuild = buildspyClub;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getBuildspyPhone() {
         return spyPhoneMapBuild;
     }
 
+    /**
+     *
+     * @param buildspyPhone
+     */
     public void setBuildspyPhone(HashMap<String, String> buildspyPhone) {
         this.spyPhoneMapBuild = buildspyPhone;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getBuildspyJob() {
         return spyJobMapBuild;
     }
 
+    /**
+     *
+     * @param buildspyJob
+     */
     public void setBuildspyJob(HashMap<String, String> buildspyJob) {
         this.spyJobMapBuild = buildspyJob;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, SpySuspect> getBuildspySuspect() {
         return spySuspectMapBuild;
     }
 
+    /**
+     *
+     * @param buildspySuspect
+     */
     public void setBuildspySuspect(HashMap<String, SpySuspect> buildspySuspect) {
         this.spySuspectMapBuild = buildspySuspect;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<SpySuspect> getSpySuspectListBuild() {
         return spySuspectListBuild;
     }
 
+    /**
+     *
+     * @param spySuspectListBuild
+     */
     public void setSpySuspectListBuild(List<SpySuspect> spySuspectListBuild) {
         this.spySuspectListBuild = spySuspectListBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getEmpClubListBuild() {
         return empClubListBuild;
     }
 
+    /**
+     *
+     * @param empClubListBuild
+     */
     public void setEmpClubListBuild(List<String> empClubListBuild) {
         this.empClubListBuild = empClubListBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getEmpPhoneListBuild() {
         return empPhoneListBuild;
     }
 
+    /**
+     *
+     * @param empPhoneListBuild
+     */
     public void setEmpPhoneListBuild(List<String> empPhoneListBuild) {
         this.empPhoneListBuild = empPhoneListBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getEmpJobListBuild() {
         return empJobListBuild;
     }
 
+    /**
+     *
+     * @param empJobListBuild
+     */
     public void setEmpJobListBuild(List<String> empJobListBuild) {
         this.empJobListBuild = empJobListBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getEmpAddressListBuild() {
         return empAddressListBuild;
     }
 
+    /**
+     *
+     * @param empAddressListBuild
+     */
     public void setEmpAddressListBuild(List<String> empAddressListBuild) {
         this.empAddressListBuild = empAddressListBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getEmpClubMapBuild() {
         return empClubMapBuild;
     }
 
+    /**
+     *
+     * @param empClubMapBuild
+     */
     public void setEmpClubMapBuild(HashMap<String, String> empClubMapBuild) {
         this.empClubMapBuild = empClubMapBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getEmpPhoneMapBuild() {
         return empPhoneMapBuild;
     }
 
+    /**
+     *
+     * @param empPhoneMapBuild
+     */
     public void setEmpPhoneMapBuild(HashMap<String, String> empPhoneMapBuild) {
         this.empPhoneMapBuild = empPhoneMapBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getEmpJobMapBuild() {
         return empJobMapBuild;
     }
 
+    /**
+     *
+     * @param empJobMapBuild
+     */
     public void setEmpJobMapBuild(HashMap<String, String> empJobMapBuild) {
         this.empJobMapBuild = empJobMapBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getSpyClubMapBuild() {
         return spyClubMapBuild;
     }
 
+    /**
+     *
+     * @param spyClubMapBuild
+     */
     public void setSpyClubMapBuild(HashMap<String, String> spyClubMapBuild) {
         this.spyClubMapBuild = spyClubMapBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getSpyPhoneMapBuild() {
         return spyPhoneMapBuild;
     }
 
+    /**
+     *
+     * @param spyPhoneMapBuild
+     */
     public void setSpyPhoneMapBuild(HashMap<String, String> spyPhoneMapBuild) {
         this.spyPhoneMapBuild = spyPhoneMapBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getEmpAddressMapBuild() {
         return empAddressMapBuild;
     }
 
+    /**
+     *
+     * @param empAddressMapBuild
+     */
     public void setEmpAddressMapBuild(HashMap<String, String> empAddressMapBuild) {
         this.empAddressMapBuild = empAddressMapBuild;
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<String, String> getSpyJobMapBuild() {
         return spyJobMapBuild;
     }

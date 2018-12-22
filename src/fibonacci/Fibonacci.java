@@ -7,16 +7,22 @@ package fibonacci;
 
 /**
  *
- * @author PatWolohan <patwolohan.org>
+ * @author PatWolohan patwolohan.org
  */
 public class Fibonacci {    
     
-    
+    /**
+     *
+     */
     public Fibonacci() {
         
     }
     
-
+    /**
+     *
+     * @param n
+     * @return
+     */
     public int fibGenerate(int n) {
         if (n <= 1) {
             return n;

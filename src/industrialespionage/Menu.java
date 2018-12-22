@@ -14,17 +14,27 @@ import buildData.SpyDataStore;
 import java.util.Scanner;
 import search.Search;
 
-
+/**
+ *
+ * @author Eanna
+ */
 public class Menu { 
 
     private String[] menuChoices;
     Search search = new Search();
     
-
+    /**
+     *
+     */
     public Menu() {
         this.menuChoices = new String[]{" List of Known Spies ", " Spy Fibonacci Sequence ", " Data Structure of Suspects ", " All Info for Employees "};
     }
 
+    /**
+     *
+     * @param b
+     * @param s
+     */
     public void runMenu(Build b, SpyDataStore s) {
         Scanner in = new Scanner(System.in);
         System.out.println("  **** Industrial Espionage Search Utility **** \n");
