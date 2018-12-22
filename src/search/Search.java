@@ -25,7 +25,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     private List<String> jobMatchesList = new ArrayList<>();
     private List<String> clubMatchesList = new ArrayList<>();
-     private List<String> societyMatchesList = new ArrayList<>();
+    private List<String> societyMatchesList = new ArrayList<>();
     private List<String> phoneMatchesList = new ArrayList<>();
     private List<String> addressMatchesList = new ArrayList<>();
     private Map<String, Long> jobMatchesMap = new LinkedHashMap<>();
@@ -52,6 +52,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
     public void spySuspectMatch(Build b, SpyDataStore s) {
 
         Map<String, String> empClubMapSearch = new LinkedHashMap<>(s.getEmpClub());
+        Map<String, String> empSocietyMapSearch = new LinkedHashMap<>(s.getEmpClub());
         Map<String, String> empPhoneMapSearch = new LinkedHashMap<>(s.getEmpPhone());
         Map<String, String> empJobMapSearch = new LinkedHashMap<>(s.getEmpJob());
         Map<String, String> empAddressMapSearch = new LinkedHashMap<>(s.getEmpAddressMap());
@@ -61,50 +62,51 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         List<String> empPhoneListSearch = new ArrayList<>(s.getEmpPhoneList());
         List<String> empJobListSearch = new ArrayList<>(s.getEmpJobList());
         List<String> empAddressListSearch = new ArrayList<>(s.getEmpAddressList());
-        
+
         List<String> empPhoneListAbrSearch = new ArrayList<>();
-        
+
         empJobListSearch.replaceAll(String::toLowerCase);
         empClubListSearch.replaceAll(String::toLowerCase);
         empAddressListSearch.replaceAll(String::toLowerCase);
-        
-        for(String str: empPhoneListSearch){
-            empPhoneListAbrSearch.add(str.substring(0, 3));            
+
+        for (String str : empPhoneListSearch) {
+            empPhoneListAbrSearch.add(str.substring(0, 3));
         }
-        
+
         List<String> phListSearch = new ArrayList<>(empPhoneListAbrSearch.stream().distinct().collect(Collectors.toList()));
-        
+
         //List<String> phListSearch = new ArrayList<>(empPhoneListSearch.subList(0, 3));
-        
-        
         HashMap<String, SpySuspect> spySuspectMapSearch = new LinkedHashMap<>(s.getSpySuspectMap());
 
         System.out.println(spySuspectMapSearch.size());
-        System.out.println(phListSearch);
+        System.out.println("Job List" + s.getJobList());
+        System.out.println("Phone List" + phListSearch);
+        System.out.println("Club List" + empClubListSearch);
+        System.out.println("Society List" + empSocietyListSearch);
+        
 
         for (Map.Entry<String, SpySuspect> spySuspect : spySuspectMapSearch.entrySet()) {
-
             String strJob = spySuspect.getValue().getEmployee().getJobTitle().toLowerCase();
             String strPhone = spySuspect.getValue().getEmployee().getPhone().substring(0, 3);
-            String strClub = spySuspect.getValue().getEmployee().getMemberOf().toLowerCase();
+            String[] empMemberSplitFromListSuspect = spySuspect.getValue().getEmployee().getMemberOf().split(",");
+            String strClub = empMemberSplitFromListSuspect[1];
+            String strSociety = empMemberSplitFromListSuspect[0];
             String strAddress = spySuspect.getValue().getEmployee().getAddress().toLowerCase();
-            
-            System.out.println(strJob);
-            System.out.println(strPhone);
-            System.out.println(strClub);
-            System.out.println(strAddress);
 
+            //System.out.println(strJob);
+            //System.out.println(strPhone);
+            //System.out.println(strClub);
+            //System.out.println(strSociety);
 //            if (jobMatchesList.contains(strJob) && phoneMatchesList.contains(strPhone) && clubMatchesList.contains(strClub)) {
 //                System.out.println("Spy Suspect found: " + spySuspect.getValue().getEmployee().getId());
 //            }
-            if (empJobListSearch.contains(strJob) && phListSearch.contains(strPhone) && empClubListSearch.contains(strClub)) {
+            if (empJobListSearch.contains(strJob) && phListSearch.contains("087") && empClubListSearch.contains(" lamb club") && empSocietyListSearch.contains("jenkins society")) {
                 System.out.println("Spy Suspect found: " + spySuspect.getValue().getEmployee().getId());
             }
-
+            //System.out.println("Not a Spy Suspect: ");
         }
 
-        System.out.println("No Spy Suspect found: ");
-
+        //System.out.println("No Spy Suspect found: ");
     }
 
     @Override
@@ -125,17 +127,17 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
         int jobMatchNo = 0;
         int clubMatchNo = 0;
-        int societyMatchNo =0;
+        int societyMatchNo = 0;
         int phoneMatchNo = 0;
         int addressMatchNo = 0;
         int index = 0;
 
         for (Spy spy : spyListSearch) {
-            
+
             String[] empMemberSplitFromList = spy.getEmployee().getMemberOf().split(",");
-            
+
             for (int i = 1; i < spyArray.length; i++) {
-                
+
                 String[] empMemberSplitFromArray = spyArray[i].getEmployee().getMemberOf().split(",");
 
                 if (spy.getEmployee().getJobTitle().equals(spyArray[i].getEmployee().getJobTitle())) {
@@ -143,14 +145,14 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
                     jobMatchesAll.add(spy.getEmployee().getJobTitle());
 
                 }
-                
-                if (empMemberSplitFromArray[0].equals(empMemberSplitFromArray[0])) {
+
+                if (empMemberSplitFromList[0].equals(empMemberSplitFromArray[0])) {
                     spy.setSocietyMatchNum(spy.getSocietyMatchNum() + 1);
                     societyMatchesAll.add(empMemberSplitFromList[0]);
 
                 }
-                
-                if (empMemberSplitFromArray[1].equals(empMemberSplitFromArray[1])) {
+
+                if (empMemberSplitFromList[1].equals(empMemberSplitFromArray[1])) {
                     spy.setClubMatchNum(spy.getClubMatchNum() + 1);
                     clubMatchesAll.add(empMemberSplitFromList[1]);
 
@@ -189,17 +191,18 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
         jobMatchesMap = checkDuplicates(jobMatchesAll);
         clubMatchesMap = checkDuplicates(clubMatchesAll);
-        clubMatchesMap = checkDuplicates(societyMatchesAll);
+        societyMatchesMap = checkDuplicates(societyMatchesAll);
         phoneMatchesMap = checkDuplicates(phoneMatchesAll);
 
         jobMatchesList = getKeysFromHashMap(jobMatchesMap, 4l);
-        clubMatchesList = getKeysFromHashMap(clubMatchesMap, 1l);
-        societyMatchesList = getKeysFromHashMap(societyMatchesMap, 1l);
+        clubMatchesList = getKeysFromHashMap(clubMatchesMap, 4l);
+        societyMatchesList = getKeysFromHashMap(societyMatchesMap, 4l);
         phoneMatchesList = getKeysFromHashMap(phoneMatchesMap, 64l);
 
         System.out.println("\nJob Matches " + jobMatchesList);
         System.out.println("Phone Matches  " + phoneMatchesList);
         System.out.println("Club Matches " + clubMatchesList);
+        System.out.println("Society Matches " + societyMatchesList);
         System.out.println("Address Matches " + addressMatchesList);
     }
 
