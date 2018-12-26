@@ -7,7 +7,7 @@ package industrialespionage;
 
 /**
  *
- * @author PatWolohan
+ * @author Pat Wolohan & Eanna Ryan
  */
 import buildData.Build;
 import buildData.SpyDataStore;
@@ -41,23 +41,20 @@ public class Menu {
             System.out.print(" \n Choose Industrial Espionage Search Menu Item: ");
             menuItem = in.nextInt();
             switch (menuItem) {
-                case 1:
-                    //System.out.println("You've chosen item #1");
+                case 1:                    
                     b.printListOfSpies();
                     runMenu(b,s);
                     break;
-                case 2:
-                    //System.out.println("You've chosen item #2");                    
+                case 2:                                      
                     b.printSpyFibIndex();
                     runMenu(b,s);
                     break;
                 case 3:
-                    System.out.println("You've chosen item #3"); 
                     search.spySearchMatch(b, s);
+                    search.spySuspectMatch(b, s);
                     break;
                 case 4:
-                    System.out.println("You've chosen item #4");
-                     search.spySuspectMatch(b, s);
+                    search.listOfEmployees(s);
                     break;                
                 case 0:
                     quit = true;

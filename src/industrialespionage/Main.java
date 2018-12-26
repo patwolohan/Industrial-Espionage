@@ -12,10 +12,16 @@ import java.util.ArrayList;
 
 /**
  *
- * @author PatWolohan 
+ * @author Pat Wolohan & Eanna Ryan
  */
 public class Main {
 
+    /**
+     *
+     * @param args
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         Build b = new Build();
