@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
+/** This Class concerns the storage of potential candidates in a combination of Arraylists and useful
+ * key:value storage option of hash maps.
  *
  * @author pwolo
  */
