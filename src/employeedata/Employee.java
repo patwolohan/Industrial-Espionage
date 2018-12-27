@@ -22,7 +22,7 @@ public class Employee implements Serializable {
 
     /**
      *
-     * @return
+     * @return String name
      */
     public String getName() {
         return name;
@@ -38,7 +38,7 @@ public class Employee implements Serializable {
 
     /**
      *
-     * @return
+     * @return String address
      */
     public String getAddress() {
         return address;
@@ -54,7 +54,7 @@ public class Employee implements Serializable {
 
     /**
      *
-     * @return
+     * @return String phone
      */
     public String getPhone() {
         return phone;
@@ -70,7 +70,7 @@ public class Employee implements Serializable {
 
     /**
      *
-     * @return
+     * @return String jobTitle
      */
     public String getJobTitle() {
         return jobTitle;
@@ -86,7 +86,7 @@ public class Employee implements Serializable {
 
     /**
      *
-     * @return
+     * @return String id
      */
     public String getId() {
         return id;
@@ -102,7 +102,7 @@ public class Employee implements Serializable {
 
     /**
      *
-     * @return
+     * @return String memberOf
      */
     public String getMemberOf() {
         return memberOf;

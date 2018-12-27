@@ -5,13 +5,10 @@
  */
 package buildData;
 
-import employeedata.Employee;
-import java.util.ArrayList;
-
 /**
  *
- * @author Pat Wolohan & Eanna Ryan
+ * @author Pat Wolohan
  */
-public interface BuildEmployeeFile {
-   public ArrayList<Employee> buildEmployeeFile(); 
+public interface PrintListOfSpies {
+    public void printListOfSpies();
 }

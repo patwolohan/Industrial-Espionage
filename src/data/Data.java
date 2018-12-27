@@ -7,29 +7,30 @@ package data;
 
 /**
  *
- * @author PatWolohan
+ * @author PatWolohan & Eanna Ryan
  */
 public class Data {
+
     private static int fibSize = 40;
+    private Integer[] fibArray = new Integer[fibSize];
 
     /**
      *
-     * @return
+     * @return fibSize
      */
     public static int getFibSize() {
         return fibSize;
     }
-    private Integer[] fibArray = new Integer[fibSize];
-        
+
     /**
-     *
+     *default constructor
      */
     public Data() {
     }
 
     /**
      *
-     * @return
+     * @return fibArray
      */
     public Integer[] getFibArray() {
         return fibArray;
@@ -37,7 +38,7 @@ public class Data {
 
     /**
      *
-     * @return
+     * @return fibArray Length
      */
     public int getFibArrayLength() {
         int l = fibArray.length;
@@ -46,13 +47,11 @@ public class Data {
 
     /**
      *
-     * @param n
-     * @param fib
+     * @param n array index
+     * @param fib Fibonacci Number
      */
-    public void setFibArray(int n, int fib){
+    public void setFibArray(int n, int fib) {
         fibArray[n] = fib;
     }
-    
-    
-    
+
 }

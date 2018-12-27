@@ -25,7 +25,7 @@ public class EmployeeExpanded {
     private boolean isJobMatch = false;
 
     /**
-     *
+     * default Constructor
      */
     public EmployeeExpanded() {
         super();
@@ -33,28 +33,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     */
-    public void getPhoneList() {
-
-    }
-
-    /**
-     *
-     */
-    public void getClubList() {
-
-    }
-
-    /**
-     *
-     */
-    public void getJobList() {
-
-    }
-
-    /**
-     *
-     * @return
+     * @return int fibIndex
      */
     public int getFibIndex() {
         return fibIndex;
@@ -70,7 +49,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return String employee
      */
     public Employee getEmployee() {
         return employee;
@@ -86,7 +65,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return int phoneMatchNum
      */
     public int getPhoneMatchNum() {
         return phoneMatchNum;
@@ -102,7 +81,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return int clubMatchNum
      */
     public int getClubMatchNum() {
         return clubMatchNum;
@@ -118,7 +97,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return int jobmatchNum
      */
     public int getJobMatchNum() {
         return jobMatchNum;
@@ -134,7 +113,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return boolean isPhoneMatch
      */
     public boolean isIsPhoneMatch() {
         return isPhoneMatch;
@@ -150,7 +129,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return boolean isClubMatch
      */
     public boolean isIsClubMatch() {
         return isClubMatch;
@@ -166,7 +145,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return boolean isJobMatch
      */
     public boolean isIsJobMatch() {
         return isJobMatch;
@@ -182,7 +161,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return int addressMatchNum
      */
     public int getAddressMatchNum() {
         return addressMatchNum;
@@ -198,7 +177,7 @@ public class EmployeeExpanded {
 
     /**
      *
-     * @return
+     * @return int societyMatchNum
      */
     public int getSocietyMatchNum() {
         return societyMatchNum;
@@ -211,39 +190,39 @@ public class EmployeeExpanded {
     public void setSocietyMatchNum(int societyMatchNum) {
         this.societyMatchNum = societyMatchNum;
     }
-
+/**
+     *
+     * @return isSocietyMatch
+     */
     public boolean isIsSocietyMatch() {
         return isSocietyMatch;
     }
-
+/**
+     *
+     * @param isSocietyMatch
+     */
     public void setIsSocietyMatch(boolean isSocietyMatch) {
         this.isSocietyMatch = isSocietyMatch;
     }
-    
-    
 
-//    @Override
-//    public String toString() {
-//        return "EmployeeExpanded{" + "employee=" + employee + ", fibIndex=" + fibIndex + ", phoneMatchNum=" + phoneMatchNum + ", clubMatchNum=" + clubMatchNum + ", jobMatchNum=" + jobMatchNum + ", addressMatchNum=" + addressMatchNum + ", isPhoneMatch=" + isPhoneMatch + ", isClubMatch=" + isClubMatch + ", isJobMatch=" + isJobMatch + '}';
-//    }
+
     @Override
     public String toString() {
         return "EmployeeExpanded : \n" + " Name : " + employee.getName()
                 + "\n Address : " + employee.getAddress() + "\n Phone : " + employee.getPhone()
                 + "\n job : " + employee.getJobTitle() + "\n id : " + employee.getId()
                 + "\n Member of : " + employee.getMemberOf() + " "
-                +"\n Fibonacci Index : " + fibIndex + " "
-                +" Job Match Number : " + jobMatchNum + " "
-                +" Phone Match Number : " + phoneMatchNum + " "
-                +" Club Match Number : " + clubMatchNum + " "
-                +" Society Match Number : " + societyMatchNum + " "
-                +" Address Match Number : " + addressMatchNum + " "
-                +"\n isJobMatch : " + isJobMatch + " "
-                +" isPhoneMatch : " + isPhoneMatch + " "
-                +" isClubMatch : " + isClubMatch + " "
-                +" isSocietyMatch : " + isSocietyMatch + "\n";
-                
+                + "\n Fibonacci Index : " + fibIndex + " "
+                + " Job Match Number : " + jobMatchNum + " "
+                + " Phone Match Number : " + phoneMatchNum + " "
+                + " Club Match Number : " + clubMatchNum + " "
+                + " Society Match Number : " + societyMatchNum + " "
+                + " Address Match Number : " + addressMatchNum + " "
+                + "\n isJobMatch : " + isJobMatch + " "
+                + " isPhoneMatch : " + isPhoneMatch + " "
+                + " isClubMatch : " + isClubMatch + " "
+                + " isSocietyMatch : " + isSocietyMatch + "\n";
+
     }
 
 }
-

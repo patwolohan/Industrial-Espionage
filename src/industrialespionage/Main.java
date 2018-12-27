@@ -26,14 +26,10 @@ public class Main {
 
         Build b = new Build();
         ArrayList<Employee> staff = b.buildEmployeeFile();
-        b.buildFib();
-        b.buildSpyList();
-        //b.printListOfSpies();
+        b.buildAll();       
         Menu menu = new Menu();
         menu.runMenu(b, b.getSpyDataStBuild());
-
-        // b.buildJobList();
-        //b.printSpyFibIndex();
+        
     }
 
 }

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  *
  * @author Pat Wolohan & Eanna Ryan
  */
-public class Build implements BuildSpyList {
+public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpyFibIndex {
     //Local Storage Data Structures
     private ArrayList<Employee> staff = new ArrayList<>();
     private Integer[] fibArray = new Integer[Data.getFibSize()];
@@ -48,6 +48,8 @@ public class Build implements BuildSpyList {
     private List<Integer> spyIndex = new ArrayList<>();
     // instantiate a SpyDataStore object
     private SpyDataStore spyDataStBuild = new SpyDataStore();
+    private Data d = new Data();
+    private Fibonacci fb = new Fibonacci();
 
     /**
      *
@@ -57,25 +59,22 @@ public class Build implements BuildSpyList {
     }
 
     /**
-     *
+     *This method creates an Integer ArrayList of Fibonacci Numbers
      */
+    @Override
     public void buildFib() {
-        //instantiate Data class
-        Data d = new Data();
-        Fibonacci fb = new Fibonacci();
+        //in Data class create Fibonacci Integer Array of FibSize(40) recursively       
         for (int i = 0; i < Data.getFibSize(); i++) {
             d.setFibArray(i, fb.fibGenerate(i));
-
         }
-
-        this.fibArray = d.getFibArray();
-        fibArrayList = Arrays.asList(fibArray);
+        //fibArrayList  is populated with Fibonacci Integer Array
+        fibArrayList = Arrays.asList(d.getFibArray());
 
     }
 
     /**
      *
-     * @return
+     * @return ArrayList Employee type object staff
      */
     public ArrayList<Employee> getStaff() {
         return staff;
@@ -83,10 +82,11 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return staff ArrayList String
      * @throws IOException
      * @throws ClassNotFoundException
      */
+    
     public ArrayList<Employee> buildEmployeeFile() throws IOException, ClassNotFoundException {
 
         staff = deserializeFromDisk(staff);
@@ -94,17 +94,18 @@ public class Build implements BuildSpyList {
     }
 
     /**
-     *
+     *Calls buildFib() and buildSpyList Methods
      */
     public void buildAll() {
-
+        buildFib();
+        buildSpyList();
     }
    
     /**
-     *
+     *Builds Spy & SpySuspect Lists
      */
+    @Override
     public void buildSpyList() {
-
         //int count = 0;
         int countIndex = 0;
         String spyEdited;
@@ -185,16 +186,18 @@ public class Build implements BuildSpyList {
     }
 
     /**
-     *
+     *Prints Spy with Fibonacci Sequence Number 
      */
     public void printSpyFibIndex() {
+         System.out.println("Fibonacci Sequence: Size: " + Data.getFibSize() + "\n");
         //print the Fibonacci Sequence
-        System.out.println(fibArrayList);
+        System.out.println(fibArrayList + "\n");           
+
         
-        spyDataStBuild.getSpyFibIndex().forEach((x, y) -> {
+        spyDataStBuild.getSpyFibIndex().forEach((x, y) -> {        
             int countspyfib = 0;
-            //for each spy print id and fibonacci index
-            System.out.println("Spy  " + x.getEmployee().getId() + " is Fibonacci " + y);
+            //for each spy print fibonacci index and spy id 
+            System.out.println( "Spy  " + x.getEmployee().getId() + " contains Fibonacci Number Index: " + y);
             countspyfib++;
         });
 
@@ -202,11 +205,10 @@ public class Build implements BuildSpyList {
     }
 
     /**
-     *
+     *Prints a List of Spies
      */
     public void printListOfSpies() {
         int countSpy = 0;
-        //for (Employee spy : spyDataStBuild.getSpyList()) {
         for (EmployeeExpanded spy : spyDataStBuild.getSpyList()) {
             countSpy++;
             System.out.println(spy);
@@ -216,14 +218,13 @@ public class Build implements BuildSpyList {
     }
 
     /**
-     *
+     *Build an ArrayList of Employee Job Titles
      */
     public void buildJobList() {
         int countj = 0;
         for (Employee emp : staff) {
             String jobTitle = emp.getJobTitle();
-            //spyDataSt.jobList.add(jobTitle);
-
+            
         }
 
         
@@ -240,7 +241,7 @@ public class Build implements BuildSpyList {
     /**
      *
      * @param staff
-     * @return
+     * @return ArrayList Employee staff
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -253,22 +254,23 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return fibArray Array of type Integer
      */
     public Integer[] getFibArray() {
         return fibArray;
     }
 
     /**
-     *
+     *Prints the Fibonacci Sequence
      */
     public void printFibArray() {
+       
         System.out.println(Arrays.toString(fibArray));
     }
 
     /**
      *
-     * @return
+     * @return ArrayList fibArrayList
      */
     public List<Integer> getFibArrayList() {
         return fibArrayList;
@@ -284,7 +286,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return List spyIndex
      */
     public List<Integer> getSpyIndex() {
         return spyIndex;
@@ -324,7 +326,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String empClubMapBuild
      */
     public HashMap<String, String> getBuildEmpClub() {
         return empClubMapBuild;
@@ -340,7 +342,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String empPhoneMapBuild
      */
     public HashMap<String, String> getBuildEmpPhone() {
         return empPhoneMapBuild;
@@ -356,7 +358,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String empJobMapBuild
      */
     public HashMap<String, String> getBuildEmpJob() {
         return empJobMapBuild;
@@ -372,7 +374,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String spyClubMapBuild
      */
     public HashMap<String, String> getBuildspyClub() {
         return spyClubMapBuild;
@@ -388,7 +390,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return  HashMap String, String spyPhonebMapBuild
      */
     public HashMap<String, String> getBuildspyPhone() {
         return spyPhoneMapBuild;
@@ -404,7 +406,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return  HashMap String, String spyJobMapBuild
      */
     public HashMap<String, String> getBuildspyJob() {
         return spyJobMapBuild;
@@ -420,7 +422,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return  HashMap String, SpySuspect spySuspectMapBuild
      */
     public HashMap<String, SpySuspect> getBuildspySuspect() {
         return spySuspectMapBuild;
@@ -436,7 +438,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return  HashMap String, String spySuspectListBuild
      */
     public List<SpySuspect> getSpySuspectListBuild() {
         return spySuspectListBuild;
@@ -452,7 +454,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return ArrayList empClubListBuild
      */
     public List<String> getEmpClubListBuild() {
         return empClubListBuild;
@@ -468,7 +470,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return ArrayList empPhoneListBuild
      */
     public List<String> getEmpPhoneListBuild() {
         return empPhoneListBuild;
@@ -484,7 +486,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return ArrayList empJobListBuild
      */
     public List<String> getEmpJobListBuild() {
         return empJobListBuild;
@@ -500,7 +502,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return ArrayList empAddressListBuild
      */
     public List<String> getEmpAddressListBuild() {
         return empAddressListBuild;
@@ -516,7 +518,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String empClubListBuild
      */
     public HashMap<String, String> getEmpClubMapBuild() {
         return empClubMapBuild;
@@ -532,7 +534,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String empPhoneMapBuild
      */
     public HashMap<String, String> getEmpPhoneMapBuild() {
         return empPhoneMapBuild;
@@ -548,7 +550,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String empClubListBuild
      */
     public HashMap<String, String> getEmpJobMapBuild() {
         return empJobMapBuild;
@@ -564,7 +566,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String spyClubMapBuild
      */
     public HashMap<String, String> getSpyClubMapBuild() {
         return spyClubMapBuild;
@@ -580,7 +582,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String spyClubMapBuild
      */
     public HashMap<String, String> getSpyPhoneMapBuild() {
         return spyPhoneMapBuild;
@@ -596,7 +598,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String empAddressMapBuild
      */
     public HashMap<String, String> getEmpAddressMapBuild() {
         return empAddressMapBuild;
@@ -612,7 +614,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, String spyJobbMapBuild
      */
     public HashMap<String, String> getSpyJobMapBuild() {
         return spyJobMapBuild;
@@ -620,7 +622,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return List String empSocietyListBuild
      */
     public List<String> getEmpSocietyListBuild() {
         return empSocietyListBuild;
@@ -636,7 +638,7 @@ public class Build implements BuildSpyList {
 
     /**
      *
-     * @return
+     * @return HashMap String, SpySuspect spySuspectMapBuild
      */
     public HashMap<String, SpySuspect> getSpySuspectMapBuild() {
         return spySuspectMapBuild;
@@ -648,6 +650,38 @@ public class Build implements BuildSpyList {
      */
     public void setSpySuspectMapBuild(HashMap<String, SpySuspect> spySuspectMapBuild) {
         this.spySuspectMapBuild = spySuspectMapBuild;
+    }
+
+    /**
+     *
+     * @return Data object d
+     */
+    public Data getD() {
+        return d;
+    }
+
+    /**
+     *
+     * @param d Data object
+     */
+    public void setD(Data d) {
+        this.d = d;
+    }
+    
+    /**
+     *
+     * @return Fibonacci object fb
+     */
+    public Fibonacci getFb() {
+        return fb;
+    }
+
+    /**
+     *
+     * @param fb Fibonacci object
+     */
+    public void setFb(Fibonacci fb) {
+        this.fb = fb;
     }
 
 }
