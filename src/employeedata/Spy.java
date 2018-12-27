@@ -8,7 +8,7 @@ package employeedata;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-/**
+/** This class is creating a data structure to store the list of known spies
  *
  * @author pwolo
  */
