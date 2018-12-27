@@ -21,8 +21,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- *
+/** 
+ * The build class takes the data points from the employee class and configures them into a series of Arraylists and Hashmaps.
+ * 
  * @author PatWolohan patwolohan.org
  */
 public class Build {
@@ -49,15 +50,15 @@ public class Build {
 
     private SpyDataStore spyDataStBuild = new SpyDataStore();
 
-    /**
+    /** 
      *
      */
     public Build() {
 
     }
 
-    /**
-     *
+    /** 
+     * This creates an array of fibonnacci numbers for comparison later on 
      */
     public void buildFib() {
 
@@ -74,8 +75,8 @@ public class Build {
     }
 
     /**
-     *
-     * @return
+     * 
+     * @return Here we are pulling the staff data from the Employee 
      */
     public ArrayList<Employee> getStaff() {
         return staff;
