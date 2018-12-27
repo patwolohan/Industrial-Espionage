@@ -84,7 +84,7 @@ public class Build {
 
     /**
      *
-     * @return
+     * @return 
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -218,7 +218,7 @@ public class Build {
         System.out.println("\n SpyFibIndex Spies " + spyDataStBuild.getSpyFibIndexSize() + "\n");
     }
 
-    /**
+    /** 
      *
      */
     public void printListOfSpies() {
@@ -233,7 +233,7 @@ public class Build {
     }
 
     /**
-     *
+     * used in analysis of the data to see the number of positions within the serialized data file.
      */
     public void buildJobList() {
         int countj = 0;
@@ -254,10 +254,10 @@ public class Build {
 
     }
 
-    /**
+    /** The method for reading the data file and creating an accessible object.
      *
      * @param staff
-     * @return
+     * @return 
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -268,8 +268,11 @@ public class Build {
         return staff;
     }
 
-    /**
-     *
+    
+    
+    
+    /** We have the getters and setters for the methods in the build class below this point.
+     * 
      * @return
      */
     public Integer[] getFibArray() {
