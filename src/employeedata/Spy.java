@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /** This class is creating a data structure to store the list of known spies
- *
+ * It uses a simple boolean switch to add them to the Hashmap and are stored
+ * the same way as the parent class "EmployeeExpanded" with arraylist and hashmap structure.
  * @author pwolo
  */
 public class Spy extends EmployeeExpanded{
