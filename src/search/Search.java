@@ -40,7 +40,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
     private int spySuspectFound = 0;
 
     /**
-     *
+     *default constructor
      */
     public Search() {
 
@@ -48,7 +48,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @param b
+     * @param b b Build class object
      */
     @Override
     public void listOfSpies(Build b) {
@@ -57,7 +57,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @param b
+     * @param b b Build class object
      */
     @Override
     public void spySequence(Build b) {
@@ -66,15 +66,15 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
     }
 
     /**
-     *
-     * @param b
-     * @param s
+     *Search for fields which Spies have in common to make searching complete list less load
+     * Big O complexity of O(N) if String variables instead of searching Lists O(n log n)
+     * @param b b Build class object
+     * @param s b SpyDataStore class object
      */
     @Override
     public void spySuspectMatch(Build b, SpyDataStore s) {
-
+        //Local data structure initialisation
         Map<String, SpySuspect> spySuspectFoundMapSearch = new LinkedHashMap<>();
-
         Map<String, String> empClubMapSearch = new LinkedHashMap<>(s.getEmpClub());
         Map<String, String> empSocietyMapSearch = new LinkedHashMap<>(s.getEmpClub());
         Map<String, String> empPhoneMapSearch = new LinkedHashMap<>(s.getEmpPhone());
@@ -86,7 +86,8 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         List<String> empJobListSearch = new ArrayList<>(s.getEmpJobList());
         List<String> empAddressListSearch = new ArrayList<>(s.getEmpAddressList());
         List<String> empPhoneListAbrSearch = new ArrayList<>();
-
+        
+        // String List structures to Lower case removing whitespace 
         empJobListSearch.replaceAll(String::toLowerCase);
         empPhoneListSearch.replaceAll(String::toLowerCase);
         empClubListSearch.replaceAll(String::toLowerCase);
@@ -94,20 +95,17 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         empSocietyListSearch.replaceAll(String::toLowerCase);
         empSocietyListSearch.replaceAll(String::trim);
         empAddressListSearch.replaceAll(String::toLowerCase);
-        
+        //remove all but phone prefix
         for (String str : empPhoneListSearch) {
             empPhoneListAbrSearch.add(str.substring(0, 3));
         }
-
+        //remove duplicate entries
         List<String> phListSearch = new ArrayList<>(empPhoneListAbrSearch.stream().distinct().collect(Collectors.toList()));
 
-        //List<String> phListSearch = new ArrayList<>(empPhoneListSearch.subList(0, 3));
+        //get SpySuspects from the SpyDataStore
         HashMap<String, SpySuspect> spySuspectMapSearch = new LinkedHashMap<>(s.getSpySuspectMap());
 
-        //phListSearch
-        //empJobListSearch
-        //empClubListSearch
-        //empSocietyListSearch
+        
         for (Map.Entry<String, SpySuspect> spySuspect : spySuspectMapSearch.entrySet()) {
             //split spySuspect member String to its constituents
             String[] empMemberSplitFromListSuspect = spySuspect.getValue().getEmployee().getMemberOf().split(",");
@@ -117,14 +115,11 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
             String spySusStrClub = empMemberSplitFromListSuspect[1].trim().toLowerCase();
             String spySusStrSociety = empMemberSplitFromListSuspect[0].trim().toLowerCase();
             String spySusStrAddress = spySuspect.getValue().getEmployee().getAddress().trim().toLowerCase();
-
-            //System.out.println(spySusStrJob);
-            //System.out.println(spySusStrPhone);
-            //System.out.println(spySusStrClub);
-            //System.out.println(spySusStrSociety);
+            
+            //for each SpySuspect
+            
             for (String job : empJobListSearch) {
-                //&& spySusStrClub.equals(clubTry)
-                //&& spySusStrSociety.equals(societyTry)
+                //search spySuspect object fields  (phone as String variable) (club as String variable)(society as String variable) and empJobListSearch Array elements
                 if (spySusStrJob.equals(job) && spySusStrPhone.equals(phoneTry) && spySusStrClub.equals(clubTry) && spySusStrSociety.equals(societyTry)) {
                     spySuspect.getValue().setIsJobMatch(true);
                     spySuspect.getValue().setIsPhoneMatch(true);
@@ -136,6 +131,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
             }
 
         }
+        //print out SpySuspect objects found
         for (Map.Entry<String, SpySuspect> spySuspect : spySuspectFoundMapSearch.entrySet()) {
             System.out.println(spySuspect);
         }
@@ -148,9 +144,10 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
     }
 
     /**
-     *
-     * @param b
-     * @param s
+     * Complexity of O(n log n)
+     * Search for fields in common between spies to reduce the big O complexity of search 
+     * @param b b Build class object
+     * @param s b SpyDataStore class object
      */
     @Override
     public void spySearchMatch(Build b, SpyDataStore s) {
@@ -166,8 +163,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         Map<Spy, String> spyHashMapSearch = new LinkedHashMap<>(s.getSpyHashMap());
         Spy[] spyArray = new Spy[s.getSpyList().size()];
         s.getSpyList().toArray(spyArray);
-        //System.out.println(Arrays.toString(spyArray));
-
+        
         int jobMatchNo = 0;
         int clubMatchNo = 0;
         int societyMatchNo = 0;
@@ -176,11 +172,11 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         int index = 0;
 
         for (Spy spy : spyListSearch) {
-
+            //split spySuspect member String to its constituents
             String[] empMemberSplitFromList = spy.getEmployee().getMemberOf().split(",");
 
             for (int i = 1; i < spyArray.length; i++) {
-
+                //split spySuspect member String to its constituents
                 String[] empMemberSplitFromArray = spyArray[i].getEmployee().getMemberOf().split(",");
 
                 if (spy.getEmployee().getJobTitle().equals(spyArray[i].getEmployee().getJobTitle())) {
@@ -217,13 +213,14 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         }
 
         for (Spy spy : spyListSearch) {
+            //count the spy commonalities
             jobMatchNo += spy.getJobMatchNum();
             phoneMatchNo += spy.getPhoneMatchNum();
             clubMatchNo += spy.getClubMatchNum();
             societyMatchNo += spy.getSocietyMatchNum();
             addressMatchNo += spy.getClubMatchNum();
 
-            //System.out.println(spy);
+            //Print Spy object id and matches
             System.out.println("Spy " + spy.getEmployee().getId() + " Job Match No. " + spy.getJobMatchNum());
             System.out.println("Spy " + spy.getEmployee().getId() + " Phone Match No. " + spy.getPhoneMatchNum());
             System.out.println("Spy " + spy.getEmployee().getId() + " Club Match No. " + spy.getClubMatchNum());
@@ -232,16 +229,19 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
             System.out.println();
         }
 
+        //Initialise Map objects with all matches
         jobMatchesMap = checkDuplicates(jobMatchesAll);
         clubMatchesMap = checkDuplicates(clubMatchesAll);
         societyMatchesMap = checkDuplicates(societyMatchesAll);
         phoneMatchesMap = checkDuplicates(phoneMatchesAll);
-
+        
+        //pick out the ones which have that number of matches from report printed
         jobMatchesList = getKeysFromHashMap(jobMatchesMap, 4l);
         clubMatchesList = getKeysFromHashMap(clubMatchesMap, 4l);
         societyMatchesList = getKeysFromHashMap(societyMatchesMap, 4l);
         phoneMatchesList = getKeysFromHashMap(phoneMatchesMap, 64l);
-
+        
+        //retrieve first element form lists
         jobTry = jobMatchesList.get(0);
         phoneTry = phoneMatchesList.get(0);
         clubTry = clubMatchesList.get(0);
@@ -261,9 +261,9 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
     }
 
     /**
-     *
-     * @param a
-     * @return
+     *Check duplicate List String entries returning Map String Long  (String occurrences)
+     * @param a ListString
+     * @return Map String Long
      */
     public Map<String, Long> checkDuplicates(List<String> a) {
 
@@ -273,14 +273,16 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
     }
 
     /**
-     *
-     * @param hm
+     * Enter String and Retrieve keys from Hashmap 
+     * Store Map Keys in List
+     * @param hm HashMap String Long 
      * @param l
-     * @return
+     * @return list List
      */
     public List<String> getKeysFromHashMap(Map<String, Long> hm, Long l) {
         List<String> list = new ArrayList();
         Set<String> keys = hm.keySet();
+        //get particular Key
         for (String key : keys) {
             if (hm.get(key).equals(l)) {
                 list.add(key);
@@ -289,6 +291,10 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         return list;
     }
     
+    /**
+     * Print List of Employees
+     * @param s SpyDataStore object
+     */
     public void listOfEmployees(SpyDataStore s){
         for (Employee emp : s.getStaffList()) {
             System.out.println(emp);
@@ -297,7 +303,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return jobMatchesList List
      */
     public List<String> getJobMatches() {
         return jobMatchesList;
@@ -313,7 +319,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return clubMatchesList List
      */
     public List<String> getClubMatches() {
         return clubMatchesList;
@@ -321,7 +327,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @param clubMatches
+     * @param clubMatches ArrayList String club memberships
      */
     public void setClubMatches(ArrayList<String> clubMatches) {
         this.clubMatchesList = clubMatches;
@@ -329,7 +335,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return phoneMatchesList List
      */
     public List<String> getPhoneMatches() {
         return phoneMatchesList;
@@ -337,7 +343,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @param phoneMatches
+     * @param phoneMatches ArrayList String Phone 
      */
     public void setPhoneMatches(ArrayList<String> phoneMatches) {
         this.phoneMatchesList = phoneMatches;
@@ -345,7 +351,8 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return 
+     * @returnjobMatchesMap Map
      */
     public Map<String, Long> getJobMatchesMap() {
         return jobMatchesMap;
@@ -353,7 +360,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @param jobMatchesMap
+     * @param jobMatchesMap Map object
      */
     public void setJobMatchesMap(Map<String, Long> jobMatchesMap) {
         this.jobMatchesMap = jobMatchesMap;
@@ -361,7 +368,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return clubMatchesMap Map object
      */
     public Map<String, Long> getClubMatchesMap() {
         return clubMatchesMap;
@@ -377,7 +384,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return phoneMatchesMap Map object
      */
     public Map<String, Long> getPhoneMatchesMap() {
         return phoneMatchesMap;
@@ -393,7 +400,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return jobMatchesList List object
      */
     public List<String> getJobMatchesList() {
         return jobMatchesList;
@@ -409,7 +416,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return clubMatchesList
      */
     public List<String> getClubMatchesList() {
         return clubMatchesList;
@@ -425,7 +432,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return phoneMatchesList
      */
     public List<String> getPhoneMatchesList() {
         return phoneMatchesList;
@@ -441,7 +448,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *
-     * @return
+     * @return addressMatchesList
      */
     public List<String> getAddressMatchesList() {
         return addressMatchesList;
@@ -455,58 +462,114 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         this.addressMatchesList = addressMatchesList;
     }
 
+    /**
+     *
+     * @return phoneTry
+     */
     public String getPhoneTry() {
         return phoneTry;
     }
 
+    /**
+     *
+     * @param phoneTry
+     */
     public void setPhoneTry(String phoneTry) {
         this.phoneTry = phoneTry;
     }
 
+    /**
+     *
+     * @return clubTry
+     */
     public String getClubTry() {
         return clubTry;
     }
 
+    /**
+     *
+     * @param clubTry
+     */
     public void setClubTry(String clubTry) {
         this.clubTry = clubTry;
     }
 
+    /**
+     *
+     * @return societyTry
+     */
     public String getSocietyTry() {
         return societyTry;
     }
 
+    /**
+     *
+     * @param societyTry
+     */
     public void setSocietyTry(String societyTry) {
         this.societyTry = societyTry;
     }
 
+    /**
+     *
+     * @return societyMatchesList
+     */
     public List<String> getSocietyMatchesList() {
         return societyMatchesList;
     }
 
+    /**
+     *
+     * @param societyMatchesList
+     */
     public void setSocietyMatchesList(List<String> societyMatchesList) {
         this.societyMatchesList = societyMatchesList;
     }
 
+    /**
+     *
+     * @return societyMatchesMap
+     */
     public Map<String, Long> getSocietyMatchesMap() {
         return societyMatchesMap;
     }
 
+    /**
+     *
+     * @param societyMatchesMap
+     */
     public void setSocietyMatchesMap(Map<String, Long> societyMatchesMap) {
         this.societyMatchesMap = societyMatchesMap;
     }
 
+    /**
+     *
+     * @return jobTry
+     */
     public String getJobTry() {
         return jobTry;
     }
 
+    /**
+     *
+     * @param jobTry
+     */
     public void setJobTry(String jobTry) {
         this.jobTry = jobTry;
     }
 
+    /**
+     *
+     * @return spySuspectFound
+     */
     public int getSpySuspectFound() {
         return spySuspectFound;
     }
 
+    /**
+     *
+     * @param spySuspectFound
+     */
     public void setSpySuspectFound(int spySuspectFound) {
         this.spySuspectFound = spySuspectFound;
     }

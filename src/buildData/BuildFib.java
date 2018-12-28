@@ -10,5 +10,9 @@ package buildData;
  * @author Pat Wolohan & Eanna Ryan
  */
 public interface BuildFib {
+
+    /**
+     *Build Fibonacci ArrayList
+     */
     public void buildFib();
 }

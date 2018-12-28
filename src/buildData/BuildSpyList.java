@@ -12,7 +12,7 @@ package buildData;
 public interface BuildSpyList {
 
     /**
-     *
+     *Build List of Spies
      */
     public void buildSpyList();
 }

@@ -16,8 +16,8 @@ public interface SpySuspectMatch {
 
     /**
      *
-     * @param b
-     * @param s
+     * @param b b Build class object
+     * @param s b SpyDataStore class object
      */
     public void spySuspectMatch(Build b, SpyDataStore s);
 }

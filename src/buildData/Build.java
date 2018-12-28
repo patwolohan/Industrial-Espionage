@@ -25,7 +25,8 @@ import java.util.stream.Collectors;
  *
  * @author Pat Wolohan & Eanna Ryan
  */
-public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpyFibIndex {
+public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpyFibIndex, BuildEmployeeFile {
+
     //Local Storage Data Structures
     private ArrayList<Employee> staff = new ArrayList<>();
     private Integer[] fibArray = new Integer[Data.getFibSize()];
@@ -59,7 +60,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
     }
 
     /**
-     *This method creates an Integer ArrayList of Fibonacci Numbers
+     * This method creates an Integer ArrayList of Fibonacci Numbers
      */
     @Override
     public void buildFib() {
@@ -86,7 +87,6 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    
     public ArrayList<Employee> buildEmployeeFile() throws IOException, ClassNotFoundException {
 
         staff = deserializeFromDisk(staff);
@@ -94,15 +94,16 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
     }
 
     /**
-     *Calls buildFib() and buildSpyList Methods
+     * Calls buildFib() and buildSpyList Methods
      */
     public void buildAll() {
         buildFib();
         buildSpyList();
     }
-   
+
     /**
-     *Builds Spy & SpySuspect Lists
+     * Builds Spy & SpySuspect Lists from Employee ArrayList data Big O
+     * complexity of O(N)
      */
     @Override
     public void buildSpyList() {
@@ -122,8 +123,8 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
             //Split Employee MemberOf String data to Club & Society
             String[] empMemberSplit = emp.getMemberOf().split(",");
             empSocietyListBuild.add(empMemberSplit[0]);
-            empClubListBuild.add(empMemberSplit[1]);         
-            
+            empClubListBuild.add(empMemberSplit[1]);
+
             //remove starting letter from staff Arraylist id and store in empId
             String empId = emp.getId().substring(1);
             //If Employee Object has an Id that ends with fibonacci set as spy object
@@ -136,8 +137,8 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
                 //add Spy object to spyList
                 spyListBuild.add(spy);
                 //add Spy object to spyHashMap with Id as Key and Spy object as value
-                spyDataStBuild.putSpyHashMap(spy, empId);               
-                
+                spyDataStBuild.putSpyHashMap(spy, empId);
+
                 //remove starting letter and assign to spyId                
                 String spyId = emp.getId().substring(1);
                 //remove "fibonacci" from String and assign to String spyEdited
@@ -145,7 +146,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
                 //parse String spyEdited to Integer spyIdInt
                 int spyIdInt = Integer.parseInt(spyEdited);
                 //System.out.println("spyIdInt " + spyIdInt);
-                
+
                 //if fibArraylist contains (spy id numerals) int spyIdInt 
                 //pick out index of fibonacci number found
                 //add to spyFibIndex LinkedHashmap 
@@ -168,7 +169,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
             }
 
         }
-        
+
         //Transfer built data to SpyDataStore Structures
         spyDataStBuild.setSpyList(spyListBuild);
         spyDataStBuild.setEmpClub(empClubMapBuild);
@@ -186,26 +187,25 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
     }
 
     /**
-     *Prints Spy with Fibonacci Sequence Number 
+     * Prints Spy with Fibonacci Sequence Number Big O complexity of O(N)
      */
     public void printSpyFibIndex() {
-         System.out.println("Fibonacci Sequence: Size: " + Data.getFibSize() + "\n");
+        System.out.println("Fibonacci Sequence: Size: " + Data.getFibSize() + "\n");
         //print the Fibonacci Sequence
-        System.out.println(fibArrayList + "\n");           
+        System.out.println(fibArrayList + "\n");
 
-        
-        spyDataStBuild.getSpyFibIndex().forEach((x, y) -> {        
+        spyDataStBuild.getSpyFibIndex().forEach((x, y) -> {
             int countspyfib = 0;
             //for each spy print fibonacci index and spy id 
-            System.out.println( "Spy  " + x.getEmployee().getId() + " contains Fibonacci Number Index: " + y);
+            System.out.println("Spy  " + x.getEmployee().getId() + " contains Fibonacci Number Index: " + y);
             countspyfib++;
         });
 
-        System.out.println("\n SpyFibIndex Spies " + spyDataStBuild.getSpyFibIndexSize() + "\n");
+        System.out.println();
     }
 
     /**
-     *Prints a List of Spies
+     * Prints a List of Spies Big O complexity of O(N)
      */
     public void printListOfSpies() {
         int countSpy = 0;
@@ -218,16 +218,15 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
     }
 
     /**
-     *Build an ArrayList of Employee Job Titles
+     * Build an ArrayList of Employee Job Titles Big O complexity of O(N)
      */
     public void buildJobList() {
         int countj = 0;
         for (Employee emp : staff) {
             String jobTitle = emp.getJobTitle();
-            
+
         }
 
-        
         spyDataStBuild.getJobList().stream().distinct().collect(Collectors.toList());
 
         for (String job : spyDataStBuild.getJobList()) {
@@ -243,7 +242,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
      * @param staff
      * @return ArrayList Employee staff
      * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException Big O complexity of O(N)
      */
     public ArrayList<Employee> deserializeFromDisk(ArrayList<Employee> staff) throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream("Employee.ser");
@@ -261,10 +260,10 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
     }
 
     /**
-     *Prints the Fibonacci Sequence
+     * Prints the Fibonacci Sequence
      */
     public void printFibArray() {
-       
+
         System.out.println(Arrays.toString(fibArray));
     }
 
@@ -390,7 +389,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
 
     /**
      *
-     * @return  HashMap String, String spyPhonebMapBuild
+     * @return HashMap String, String spyPhonebMapBuild
      */
     public HashMap<String, String> getBuildspyPhone() {
         return spyPhoneMapBuild;
@@ -406,7 +405,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
 
     /**
      *
-     * @return  HashMap String, String spyJobMapBuild
+     * @return HashMap String, String spyJobMapBuild
      */
     public HashMap<String, String> getBuildspyJob() {
         return spyJobMapBuild;
@@ -422,7 +421,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
 
     /**
      *
-     * @return  HashMap String, SpySuspect spySuspectMapBuild
+     * @return HashMap String, SpySuspect spySuspectMapBuild
      */
     public HashMap<String, SpySuspect> getBuildspySuspect() {
         return spySuspectMapBuild;
@@ -438,7 +437,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
 
     /**
      *
-     * @return  HashMap String, String spySuspectListBuild
+     * @return HashMap String, String spySuspectListBuild
      */
     public List<SpySuspect> getSpySuspectListBuild() {
         return spySuspectListBuild;
@@ -667,7 +666,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
     public void setD(Data d) {
         this.d = d;
     }
-    
+
     /**
      *
      * @return Fibonacci object fb

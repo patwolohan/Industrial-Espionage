@@ -15,7 +15,7 @@ public interface SpySequence {
 
     /**
      *
-     * @param b
+     * @param b b Build class object
      */
     public void spySequence(Build b);
     

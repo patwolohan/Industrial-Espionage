@@ -12,16 +12,16 @@ package fibonacci;
 public class Fibonacci {    
     
     /**
-     *
+     *default constructor
      */
     public Fibonacci() {
         
     }
     
     /**
-     *
-     * @param n
-     * @return
+     *Recursive Fibonacci Generator 
+     * @param n int parameter entered
+     * @return fibonacci number for int n entered
      */
     public int fibGenerate(int n) {
         if (n <= 1) {

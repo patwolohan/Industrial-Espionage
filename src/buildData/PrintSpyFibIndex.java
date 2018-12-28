@@ -10,5 +10,9 @@ package buildData;
  * @author Pat Wolohan
  */
 public interface PrintSpyFibIndex {
+
+    /**
+     *Print Spy Fibonacci object
+     */
     public void printSpyFibIndex();
 }

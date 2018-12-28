@@ -12,5 +12,10 @@ import buildData.SpyDataStore;
  * @author Pat Wolohan & Eanna Ryan
  */
 public interface ListOfEmployees {
+
+    /**
+     *
+     * @param s SpyDataStore  class object
+     */
     public void listOfEmployees(SpyDataStore s);    
 }
