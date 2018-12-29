@@ -7,7 +7,6 @@ package buildData;
 
 import data.Data;
 import employeedata.Employee;
-import employeedata.EmployeeExpanded;
 import employeedata.Spy;
 import employeedata.SpySuspect;
 import fibonacci.Fibonacci;
@@ -75,18 +74,11 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
 
     /**
      *
-     * @return ArrayList Employee type object staff
-     */
-    public ArrayList<Employee> getStaff() {
-        return staff;
-    }
-
-    /**
-     *
      * @return staff ArrayList String
      * @throws IOException
      * @throws ClassNotFoundException
      */
+    @Override
     public ArrayList<Employee> buildEmployeeFile() throws IOException, ClassNotFoundException {
 
         staff = deserializeFromDisk(staff);
@@ -110,6 +102,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
         //int count = 0;
         int countIndex = 0;
         String spyEdited;
+        //iterate through ArrayList staff
         for (Employee emp : staff) {
             //Employee Fields to LinkedHashMap Build Data Storage
             empClubMapBuild.put(emp.getId(), emp.getMemberOf());
@@ -183,12 +176,13 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
         spyDataStBuild.setEmpSocietyList(empSocietyListBuild);
         spyDataStBuild.setStaffList(staff);
         System.out.println("Spies found :" + countIndex);
-        
+
     }
 
     /**
      * Prints Spy with Fibonacci Sequence Number Big O complexity of O(N)
      */
+    @Override
     public void printSpyFibIndex() {
         System.out.println("Fibonacci Sequence: Size: " + Data.getFibSize() + "\n");
         //print the Fibonacci Sequence
@@ -207,6 +201,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
     /**
      * Prints a List of Spies Big O complexity of O(N)
      */
+    @Override
     public void printListOfSpies() {
         int countSpy = 0;
         for (Spy spy : spyDataStBuild.getSpyList()) {
@@ -222,23 +217,24 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
      */
     public void buildJobList() {
         int countj = 0;
-        for (Employee emp : staff) {
+        staff.forEach((emp) -> {
             String jobTitle = emp.getJobTitle();
-
-        }
+        });
 
         spyDataStBuild.getJobList().stream().distinct().collect(Collectors.toList());
 
-        for (String job : spyDataStBuild.getJobList()) {
+        countj = spyDataStBuild.getJobList().stream().map((job) -> {
             System.out.println(job);
-            countj++;
-        }
+            return job;
+        }).map((_item) -> 1).reduce(countj, Integer::sum);
         System.out.println("No. of Job Titles " + countj);
 
     }
 
     /**
-     *Streams the serialized Employee data from disk file and reads it to ArrayList staff
+     * Streams the serialized Employee data from disk file and reads it to
+     * ArrayList staff
+     *
      * @param staff
      * @return ArrayList Employee staff
      * @throws IOException
@@ -248,6 +244,14 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
         FileInputStream fileIn = new FileInputStream("Employee.ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
         staff = (ArrayList<Employee>) in.readObject();
+        return staff;
+    }
+
+    /**
+     *
+     * @return ArrayList Employee type object staff
+     */
+    public ArrayList<Employee> getStaff() {
         return staff;
     }
 

@@ -7,7 +7,6 @@ package search;
 
 import buildData.Build;
 import buildData.SpyDataStore;
-import employeedata.Employee;
 import employeedata.Spy;
 import employeedata.SpySuspect;
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
 
     /**
      *Search for fields which Spies have in common to make searching complete list less load
-     * Big O complexity of O(N) if String variables instead of searching Lists O(n log n)
+     * Big O complexity of O(N^2) if String variables instead of searching Lists O(n^5)
      * @param b b Build class object
      * @param s b SpyDataStore class object
      */
@@ -96,9 +95,9 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         empSocietyListSearch.replaceAll(String::trim);
         empAddressListSearch.replaceAll(String::toLowerCase);
         //remove all but phone prefix
-        for (String str : empPhoneListSearch) {
+        empPhoneListSearch.forEach((str) -> {
             empPhoneListAbrSearch.add(str.substring(0, 3));
-        }
+        });
         //remove duplicate entries
         List<String> phListSearch = new ArrayList<>(empPhoneListAbrSearch.stream().distinct().collect(Collectors.toList()));
 
@@ -106,35 +105,37 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         HashMap<String, SpySuspect> spySuspectMapSearch = new LinkedHashMap<>(s.getSpySuspectMap());
 
         
-        for (Map.Entry<String, SpySuspect> spySuspect : spySuspectMapSearch.entrySet()) {
+        spySuspectMapSearch.entrySet().forEach((Map.Entry<String, SpySuspect> spySuspect) -> {
             //split spySuspect member String to its constituents
             String[] empMemberSplitFromListSuspect = spySuspect.getValue().getEmployee().getMemberOf().split(",");
             //edit spySuspect field String properties to trim spaces, make lowercase, and extract characters
             String spySusStrJob = spySuspect.getValue().getEmployee().getJobTitle().trim().toLowerCase();
-            String spySusStrPhone = spySuspect.getValue().getEmployee().getPhone().substring(0, 3);           
+            String spySusStrPhone = spySuspect.getValue().getEmployee().getPhone().substring(0, 3);
             String spySusStrClub = empMemberSplitFromListSuspect[1].trim().toLowerCase();
             String spySusStrSociety = empMemberSplitFromListSuspect[0].trim().toLowerCase();
             String spySusStrAddress = spySuspect.getValue().getEmployee().getAddress().trim().toLowerCase();
             
             //for each SpySuspect
-            
-            for (String job : empJobListSearch) {
-                //search spySuspect object fields  (phone as String variable) (club as String variable)(society as String variable) and empJobListSearch Array elements
-                if (spySusStrJob.equals(job) && spySusStrPhone.equals(phoneTry) && spySusStrClub.equals(clubTry) && spySusStrSociety.equals(societyTry)) {
-                    spySuspect.getValue().setIsJobMatch(true);
-                    spySuspect.getValue().setIsPhoneMatch(true);
-                    spySuspect.getValue().setIsClubMatch(true);
-                    spySuspect.getValue().setIsSocietyMatch(true);
-                    spySuspectFoundMapSearch.put(spySuspect.getValue().getEmployee().getId(), spySuspect.getValue());
-                }
-
-            }
-
-        }
+            empJobListSearch.stream().filter((job) -> (spySusStrJob.equals(job) && spySusStrPhone.equals(phoneTry) && spySusStrClub.equals(clubTry) && spySusStrSociety.equals(societyTry))).map((_item) -> {
+                spySuspect.getValue().setIsJobMatch(true);
+                return _item;
+            }).map((_item) -> {
+                spySuspect.getValue().setIsPhoneMatch(true);
+                return _item;
+            }).map((_item) -> {
+                spySuspect.getValue().setIsClubMatch(true);
+                return _item;
+            }).map((_item) -> {
+                spySuspect.getValue().setIsSocietyMatch(true);
+                return _item;
+            }).forEachOrdered((_item) -> {
+                spySuspectFoundMapSearch.put(spySuspect.getValue().getEmployee().getId(), spySuspect.getValue());
+            }); //search spySuspect object fields  (phone as String variable) (club as String variable)(society as String variable) and empJobListSearch Array elements
+        });
         //print out SpySuspect objects found
-        for (Map.Entry<String, SpySuspect> spySuspect : spySuspectFoundMapSearch.entrySet()) {
+        spySuspectFoundMapSearch.entrySet().forEach((spySuspect) -> {
             System.out.println(spySuspect);
-        }
+        });
         System.out.println("No. of Spy Suspect found: " + spySuspectFoundMapSearch.size());
         System.out.println(spySuspectMapSearch.size());
         System.out.println("Job List" + empJobListSearch);
@@ -144,7 +145,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
     }
 
     /**
-     * Complexity of O(n log n)
+     * Complexity of O(n^2)
      * Search for fields in common between spies to reduce the big O complexity of search 
      * @param b b Build class object
      * @param s b SpyDataStore class object
@@ -171,7 +172,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         int addressMatchNo = 0;
         int index = 0;
 
-        for (Spy spy : spyListSearch) {
+        spyListSearch.forEach((spy) -> {
             //split spySuspect member String to its constituents
             String[] empMemberSplitFromList = spy.getEmployee().getMemberOf().split(",");
 
@@ -209,8 +210,7 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
                 }
 
             }
-
-        }
+        });
 
         for (Spy spy : spyListSearch) {
             //count the spy commonalities
@@ -283,11 +283,9 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
         List<String> list = new ArrayList();
         Set<String> keys = hm.keySet();
         //get particular Key
-        for (String key : keys) {
-            if (hm.get(key).equals(l)) {
-                list.add(key);
-            }
-        }
+        keys.stream().filter((key) -> (hm.get(key).equals(l))).forEachOrdered((key) -> {
+            list.add(key);
+        });
         return list;
     }
     
@@ -296,9 +294,9 @@ public class Search implements ListOfSpies, SpySearchMatch, SpySequence, SpySusp
      * @param s SpyDataStore object
      */
     public void listOfEmployees(SpyDataStore s){
-        for (Employee emp : s.getStaffList()) {
+        s.getStaffList().forEach((emp) -> {
             System.out.println(emp);
-        }
+        });
     }
 
     /**
