@@ -183,7 +183,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
         spyDataStBuild.setEmpSocietyList(empSocietyListBuild);
         spyDataStBuild.setStaffList(staff);
         System.out.println("Spies found :" + countIndex);
-        //System.out.println("Phone List found :" + empPhoneListBuild);
+        
     }
 
     /**
@@ -209,7 +209,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
      */
     public void printListOfSpies() {
         int countSpy = 0;
-        for (EmployeeExpanded spy : spyDataStBuild.getSpyList()) {
+        for (Spy spy : spyDataStBuild.getSpyList()) {
             countSpy++;
             System.out.println(spy);
         }
@@ -238,7 +238,7 @@ public class Build implements BuildSpyList, BuildFib, PrintListOfSpies, PrintSpy
     }
 
     /**
-     *
+     *Streams the serialized Employee data from disk file and reads it to ArrayList staff
      * @param staff
      * @return ArrayList Employee staff
      * @throws IOException
