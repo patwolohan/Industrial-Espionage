@@ -61,6 +61,7 @@ public class Menu {
                 case 3:
                     search.spySearchMatch(b, s);
                     search.spySuspectMatch(b, s);
+                    runMenu(b,s);
                     break;
                 case 4:
                     search.listOfEmployees(s);
@@ -74,5 +75,13 @@ public class Menu {
             }
         } while (!quit);
         System.out.println("You have ended the Industrial Espionage Search Utility ");
+    }
+
+    public String[] getMenuChoices() {
+        return menuChoices;
+    }
+
+    public void setMenuChoices(String[] menuChoices) {
+        this.menuChoices = menuChoices;
     }
 }
